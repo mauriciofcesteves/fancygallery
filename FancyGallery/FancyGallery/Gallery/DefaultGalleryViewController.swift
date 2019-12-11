@@ -10,21 +10,54 @@ import UIKit
 
 class DefaultGalleryViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    // MARK: - Enums
+    enum GalleryType: Int {
+        case all
+        case favourites
+    }
     
-    let images = [UIImage(named: "Pet1"), UIImage(named: "Pet2")]
+    enum TabControlIndex: Int {
+        case all
+        case favourites
+        case count
+        
+        func toString() -> String {
+            switch self {
+            case .all:
+                return "All"
+            case .favourites:
+                return "Favourites"
+            default:
+                return ""
+            }
+        }
+    }
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tabControlContainerView: UIView!
+    
+    // MARK: - General Variables
+    private var currentTabIndex: TabControlIndex = .all
+    private var favouritePhotos: NSOrderedSet = []
+    private var data: [PhotoModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabControlContainerView.applyBottomShadow()
         tableViewPreSetup()
+        loadFavouritePhotos()
+        loadData()
     }
     
     /** UITableView properties setup */
     func tableViewPreSetup() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 400
+        tableView.allowsSelection = false
         
         //stick the header to the tableView while scrolling
         let viewHeight = CGFloat(40)
@@ -34,6 +67,25 @@ class DefaultGalleryViewController: UIViewController {
         //Register TableViewCells into TableView
         tableView.register(UINib(nibName: "DefaultGalleryMainImageTableViewCell", bundle: nil), forCellReuseIdentifier: "DefaultGalleryMainImageTableViewCell")
     }
+    
+    /** Save photo from UserDefaults */
+    func saveFavouriteOffers() {
+        UserDefaults.standard.set(favouritePhotos, forKey: "favouritePhotos")
+    }
+    
+    /** Load saved photos from UserDefaults */
+    func loadFavouritePhotos() {
+        favouritePhotos = []
+        favouritePhotos = UserDefaults.standard.value(forKey: "favouritePhotos") as? NSOrderedSet ?? []
+    }
+    
+    /** TODO: Fetch data from a back end */
+    func loadData() {
+        data = []
+        data?.append(PhotoModel(id: 0, name: "Pet1"))
+        data?.append(PhotoModel(id: 1, name: "Pet2"))
+        data?.append(PhotoModel(id: 2, name: "Pet3"))
+    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -41,7 +93,7 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
     
     /** Called to retrieve the number of sections in the table view. */
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return data?.count ?? 0
     }
     
     /** Called to retrieve the number of rows for a given section. */
@@ -54,11 +106,12 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultGalleryMainImageTableViewCell", for: indexPath) as? DefaultGalleryMainImageTableViewCell {
 
-            guard let image = images[indexPath.section] else {
+            guard let name = data?[indexPath.section].name, let image = UIImage(named: name) else {
                 return UITableViewCell()
             }
             
-            cell.update(image)
+            cell.delegate = self
+            cell.update(image, indexPath)
             return cell
         }
         return UITableViewCell()
@@ -68,23 +121,19 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+}
+
+/** Callback for heart button - DefaultGalleryMainImageTableViewCellDelegate */
+extension DefaultGalleryViewController: DefaultGalleryMainImageTableViewCellDelegate {
     
-    /** Custom table view header */
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+    func didTouchHeartButton(cell: DefaultGalleryMainImageTableViewCell, isFavourite: Bool, indexPath: IndexPath) {
+        let selectedPhoto = data?[indexPath.section]
         
-        let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 0, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = "Title"
-        label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 16)
-        label.textColor = .black
+        guard let id = selectedPhoto?.id else {
+            return
+        }
         
-        headerView.addSubview(label)
-        
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        favouritePhotos.setValue(id, forKey: String(indexPath.section))
+        saveFavouriteOffers()
     }
 }

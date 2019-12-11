@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DefaultGalleryViewController" customModule="FancyGallery" customModuleProvider="target">
             <connections>
+                <outlet property="tabControlContainerView" destination="fHp-JD-jiv" id="cdC-0r-HWj"/>
                 <outlet property="tableView" destination="bLz-jk-CzY" id="cQz-Pw-6rV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,22 +23,69 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bLz-jk-CzY">
-                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <rect key="frame" x="0.0" y="114" width="414" height="698"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="35a-9v-7vS"/>
                         <outlet property="delegate" destination="-1" id="3s1-ji-x2a"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHp-JD-jiv">
+                    <rect key="frame" x="0.0" y="44" width="414" height="70"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gallery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euk-ZJ-bgI">
+                            <rect key="frame" x="20" y="26" width="80" height="29"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="euk-ZJ-bgI" firstAttribute="leading" secondItem="fHp-JD-jiv" secondAttribute="leading" constant="20" id="Ye2-Er-6PS"/>
+                        <constraint firstAttribute="height" constant="70" id="ZVI-Ub-F8H"/>
+                        <constraint firstAttribute="bottom" secondItem="euk-ZJ-bgI" secondAttribute="bottom" constant="15" id="tvY-ZJ-fnA"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHZ-XU-9l7">
+                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                    <subviews>
+                        <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOw-SD-myP">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <items>
+                                <tabBarItem title="" systemItem="mostViewed" id="jdD-MW-y1O"/>
+                                <tabBarItem systemItem="contacts" id="4d6-Gh-2iD"/>
+                                <tabBarItem title="" systemItem="favorites" id="YE9-OK-RdJ"/>
+                            </items>
+                        </tabBar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="mOw-SD-myP" firstAttribute="leading" secondItem="VHZ-XU-9l7" secondAttribute="leading" id="9z7-Xs-K4H"/>
+                        <constraint firstAttribute="trailing" secondItem="mOw-SD-myP" secondAttribute="trailing" id="YS6-4c-nbA"/>
+                        <constraint firstItem="mOw-SD-myP" firstAttribute="top" secondItem="VHZ-XU-9l7" secondAttribute="top" id="dAz-H5-gcO"/>
+                        <constraint firstAttribute="height" constant="50" id="nnY-xZ-PVl"/>
+                        <constraint firstAttribute="bottom" secondItem="mOw-SD-myP" secondAttribute="bottom" id="oCf-gb-vlg"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="bLz-jk-CzY" secondAttribute="bottom" id="eZI-2X-r7e"/>
-                <constraint firstItem="bLz-jk-CzY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="efY-fG-roc"/>
-                <constraint firstItem="bLz-jk-CzY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hzK-kn-oWx"/>
-                <constraint firstItem="bLz-jk-CzY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kr2-Re-jbz"/>
+                <constraint firstItem="bLz-jk-CzY" firstAttribute="top" secondItem="fHp-JD-jiv" secondAttribute="bottom" id="0mO-AE-DBF"/>
+                <constraint firstItem="fHp-JD-jiv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8oE-X2-YCJ"/>
+                <constraint firstItem="VHZ-XU-9l7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EHu-fH-dZy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VHZ-XU-9l7" secondAttribute="bottom" id="LzC-lc-TXT"/>
+                <constraint firstItem="fHp-JD-jiv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QcQ-kx-REb"/>
+                <constraint firstItem="bLz-jk-CzY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Z2F-y3-NB2"/>
+                <constraint firstItem="bLz-jk-CzY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dRI-15-HJ8"/>
+                <constraint firstItem="VHZ-XU-9l7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eHh-mB-uuf"/>
+                <constraint firstItem="fHp-JD-jiv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="liL-rQ-IlG"/>
+                <constraint firstItem="VHZ-XU-9l7" firstAttribute="top" secondItem="bLz-jk-CzY" secondAttribute="bottom" id="rXG-EN-VYA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
         </view>
     </objects>
 </document>
