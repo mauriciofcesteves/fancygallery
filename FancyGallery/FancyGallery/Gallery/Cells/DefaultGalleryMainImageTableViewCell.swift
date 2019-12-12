@@ -34,9 +34,11 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
     }
     
     /** Update the cell content with real data. */
-    func update(_ image: UIImage, _ indexPath: IndexPath) {
+    func update(_ image: UIImage, isFavourite: Bool = false, _ indexPath: IndexPath) {
         self.indexPath = indexPath
         mainImageView.image = image
+        self.isFavourite = isFavourite
+        switchHeartButtonStatus()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,12 +49,12 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
     
     /** Favourite button was touched. */
     @IBAction func heartButtonTouched(_ sender: Any) {
-        isFavourite = !isFavourite
-        switchHeartButtonStatus()
-        
         guard let indexPath = indexPath else {
             return
         }
+        
+        isFavourite = !isFavourite
+        switchHeartButtonStatus()
         
         delegate?.didTouchHeartButton(cell: self, isFavourite: isFavourite, indexPath: indexPath)
     }
