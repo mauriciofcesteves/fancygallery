@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B648995423A05BE00012EC7A /* UIView+ApplyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648995323A05BE00012EC7A /* UIView+ApplyShadow.swift */; };
+		B648995723A086250012EC7A /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648995623A086250012EC7A /* PhotoModel.swift */; };
 		B658BECA239EE8FB004AB608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658BEC9239EE8FB004AB608 /* AppDelegate.swift */; };
 		B658BECC239EE8FB004AB608 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658BECB239EE8FB004AB608 /* ViewController.swift */; };
 		B658BECF239EE8FB004AB608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B658BECD239EE8FB004AB608 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B648995323A05BE00012EC7A /* UIView+ApplyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ApplyShadow.swift"; sourceTree = "<group>"; };
+		B648995623A086250012EC7A /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		B658BEC6239EE8FB004AB608 /* FancyGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B658BEC9239EE8FB004AB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B658BECB239EE8FB004AB608 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +47,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B648995223A05BC60012EC7A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B648995323A05BE00012EC7A /* UIView+ApplyShadow.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B648995523A0860F0012EC7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B648995623A086250012EC7A /* PhotoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B658BEBD239EE8FB004AB608 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +82,8 @@
 		B658BEC8239EE8FB004AB608 /* FancyGallery */ = {
 			isa = PBXGroup;
 			children = (
+				B648995523A0860F0012EC7A /* Model */,
+				B648995223A05BC60012EC7A /* Extensions */,
 				B658BEDC239EE9A7004AB608 /* Gallery */,
 				B658BEC9239EE8FB004AB608 /* AppDelegate.swift */,
 				B658BECB239EE8FB004AB608 /* ViewController.swift */,
@@ -165,7 +187,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B648995723A086250012EC7A /* PhotoModel.swift in Sources */,
 				B658BEDF239EE9F4004AB608 /* DefaultGalleryViewController.swift in Sources */,
+				B648995423A05BE00012EC7A /* UIView+ApplyShadow.swift in Sources */,
 				B658BEE4239F12FD004AB608 /* DefaultGalleryMainImageTableViewCell.swift in Sources */,
 				B658BECC239EE8FB004AB608 /* ViewController.swift in Sources */,
 				B658BECA239EE8FB004AB608 /* AppDelegate.swift in Sources */,
