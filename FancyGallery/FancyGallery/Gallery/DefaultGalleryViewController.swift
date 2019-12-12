@@ -188,6 +188,20 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
 /** MARK: DefaultGalleryMainImageTableViewCellDelegate - Callback for heart(favourite) button */
 extension DefaultGalleryViewController: DefaultGalleryMainImageTableViewCellDelegate {
     
+    func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
+        guard let model = dataToBePresented?[indexPath.section] else {
+            return
+        }
+        
+        let message = "Share photo"
+        let image = UIImage(named: model.name)!
+        let objectsToShare = [message, image] as [Any]
+        
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
     func didTouchHeartButton(cell: DefaultGalleryMainImageTableViewCell, isFavourite: Bool, indexPath: IndexPath) {
         let selectedPhoto = dataToBePresented?[indexPath.section]
         
