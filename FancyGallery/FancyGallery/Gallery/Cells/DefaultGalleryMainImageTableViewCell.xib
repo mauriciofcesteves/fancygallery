@@ -31,13 +31,6 @@
                                             <constraint firstAttribute="height" constant="340" id="ghm-fm-tMj"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="g9k-6M-Gxf">
-                                        <rect key="frame" x="318" y="370" width="37" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="37" id="VYb-Jm-PwT"/>
-                                            <constraint firstAttribute="height" constant="37" id="nza-cc-e89"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaP-55-9GF">
                                         <rect key="frame" x="263" y="370" width="40" height="40"/>
                                         <constraints>
@@ -61,21 +54,32 @@
                                         <color key="textColor" red="0.36862745098039218" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.36862745098039218" green="0.38039215686274508" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGb-Th-IE9">
+                                        <rect key="frame" x="318" y="369" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="37" id="8oq-VK-aKs"/>
+                                            <constraint firstAttribute="width" constant="37" id="QOp-Hy-X7r"/>
+                                        </constraints>
+                                        <state key="normal" image="share"/>
+                                        <connections>
+                                            <action selector="shareButtonTouched:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dYL-gr-Jos"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="uLi-NE-wKG" firstAttribute="leading" secondItem="cyJ-UN-1fc" secondAttribute="leading" constant="15" id="0iH-Ek-jHd"/>
                                     <constraint firstItem="QEh-h8-9JP" firstAttribute="leading" secondItem="cyJ-UN-1fc" secondAttribute="leading" constant="15" id="1Ob-H3-AYr"/>
-                                    <constraint firstAttribute="trailing" secondItem="g9k-6M-Gxf" secondAttribute="trailing" constant="15" id="6Gh-O9-8iJ"/>
                                     <constraint firstItem="HaP-55-9GF" firstAttribute="leading" secondItem="uLi-NE-wKG" secondAttribute="trailing" constant="10" id="6Qi-ym-hXr"/>
+                                    <constraint firstItem="TGb-Th-IE9" firstAttribute="leading" secondItem="HaP-55-9GF" secondAttribute="trailing" constant="15" id="BWy-am-DiA"/>
+                                    <constraint firstAttribute="trailing" secondItem="TGb-Th-IE9" secondAttribute="trailing" constant="15" id="Q6o-ni-88e"/>
                                     <constraint firstItem="HaP-55-9GF" firstAttribute="top" secondItem="QEh-h8-9JP" secondAttribute="bottom" constant="15" id="Vrl-nw-fLa"/>
-                                    <constraint firstItem="g9k-6M-Gxf" firstAttribute="leading" secondItem="HaP-55-9GF" secondAttribute="trailing" constant="15" id="bb2-wp-7Nw"/>
                                     <constraint firstAttribute="trailing" secondItem="QEh-h8-9JP" secondAttribute="trailing" constant="15" id="gWq-vM-bmx"/>
                                     <constraint firstItem="uLi-NE-wKG" firstAttribute="top" secondItem="FQW-6b-Egf" secondAttribute="bottom" constant="1" id="kOB-ts-bI8"/>
                                     <constraint firstItem="HaP-55-9GF" firstAttribute="leading" secondItem="FQW-6b-Egf" secondAttribute="trailing" constant="10" id="ovB-JG-Xdi"/>
+                                    <constraint firstItem="TGb-Th-IE9" firstAttribute="top" secondItem="QEh-h8-9JP" secondAttribute="bottom" constant="15" id="ttG-En-0jz"/>
                                     <constraint firstItem="FQW-6b-Egf" firstAttribute="top" secondItem="QEh-h8-9JP" secondAttribute="bottom" constant="15" id="uXB-Nz-qeI"/>
                                     <constraint firstItem="QEh-h8-9JP" firstAttribute="top" secondItem="cyJ-UN-1fc" secondAttribute="top" constant="15" id="vM4-D4-FpQ"/>
-                                    <constraint firstItem="g9k-6M-Gxf" firstAttribute="top" secondItem="QEh-h8-9JP" secondAttribute="bottom" constant="15" id="vdY-ye-gHo"/>
                                     <constraint firstItem="FQW-6b-Egf" firstAttribute="leading" secondItem="cyJ-UN-1fc" secondAttribute="leading" constant="15" id="vyr-yv-WZw"/>
                                 </constraints>
                             </view>

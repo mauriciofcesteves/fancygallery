@@ -9,7 +9,12 @@
 import UIKit
 
 protocol DefaultGalleryMainImageTableViewCellDelegate: class {
+    
+    /** Callback for favourite button */
     func didTouchHeartButton(cell: DefaultGalleryMainImageTableViewCell, isFavourite: Bool, indexPath: IndexPath)
+    
+    /** Callback for share button*/
+    func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath)
 }
 
 class DefaultGalleryMainImageTableViewCell: UITableViewCell {
@@ -57,6 +62,15 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
         switchHeartButtonStatus()
         
         delegate?.didTouchHeartButton(cell: self, isFavourite: isFavourite, indexPath: indexPath)
+    }
+    
+    /** Share button was touched */
+    @IBAction func shareButtonTouched(_ sender: Any) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        
+        delegate?.didTouchShareButton(cell: self, indexPath: indexPath)
     }
     
     /** Switch the favourite button to the active/unactive status. */
