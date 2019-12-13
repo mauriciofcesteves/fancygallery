@@ -26,6 +26,6 @@ extension UIView {
     
     /** Apply shadow to the bottom of the view. */
     func applyBottomShadow() {
-        self.applyShadow(shadowRadius: 1.0, height: 3.0)
+        self.applyShadow(shadowRadius: 1.0, height: 2.0)
     }
 }

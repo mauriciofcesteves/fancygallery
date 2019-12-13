@@ -13,13 +13,11 @@ class DefaultGalleryViewController: UIViewController {
     // MARK: - Enums
     enum GalleryType: Int {
         case tableViewMode
-        case collectionViewMode
         case favouritesOnly
     }
     
     enum TabControlIndex: Int {
         case tableViewMode
-        case collectionViewMode
         case favouritesOnly
         case count
         
@@ -27,8 +25,6 @@ class DefaultGalleryViewController: UIViewController {
             switch self {
             case .tableViewMode:
                 return "TableView Mode"
-            case .collectionViewMode:
-                return "CollectionView Mode"
             case .favouritesOnly:
                 return "Favourites"
             default:
@@ -188,13 +184,22 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
 /** MARK: DefaultGalleryMainImageTableViewCellDelegate - Callback for heart(favourite) button */
 extension DefaultGalleryViewController: DefaultGalleryMainImageTableViewCellDelegate {
     
-    func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
-        guard let model = dataToBePresented?[indexPath.section] else {
+    func didTouchImageView(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
+        guard let model = dataToBePresented?[indexPath.section], let image = UIImage(named: model.name) else {
             return
         }
         
-        let message = "Share photo"
-        let image = UIImage(named: model.name)!
+        let controller = PhotoDialogViewController()
+        self.navigationController?.present(controller, animated: true)
+        controller.photoImageView.image = image
+    }
+    
+    func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
+        guard let model = dataToBePresented?[indexPath.section], let image = UIImage(named: model.name) else {
+            return
+        }
+        
+        let message = ""
         let objectsToShare = [message, image] as [Any]
         
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

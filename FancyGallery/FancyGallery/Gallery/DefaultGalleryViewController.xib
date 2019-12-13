@@ -57,8 +57,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <items>
                                 <tabBarItem title="" systemItem="mostViewed" id="jdD-MW-y1O"/>
-                                <tabBarItem tag="1" systemItem="contacts" id="4d6-Gh-2iD"/>
-                                <tabBarItem tag="2" title="" systemItem="favorites" id="YE9-OK-RdJ"/>
+                                <tabBarItem tag="1" title="" systemItem="favorites" id="YE9-OK-RdJ"/>
                             </items>
                         </tabBar>
                     </subviews>
