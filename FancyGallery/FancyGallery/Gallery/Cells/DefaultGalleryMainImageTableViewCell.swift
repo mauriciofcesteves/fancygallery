@@ -15,6 +15,9 @@ protocol DefaultGalleryMainImageTableViewCellDelegate: class {
     
     /** Callback for share button*/
     func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath)
+    
+    /** Callback for photo view */
+    func didTouchImageView(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath)
 }
 
 class DefaultGalleryMainImageTableViewCell: UITableViewCell {
@@ -28,7 +31,7 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
     weak var delegate: DefaultGalleryMainImageTableViewCellDelegate?
     private var indexPath: IndexPath?
     private var isFavourite: Bool = false
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -36,6 +39,10 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
         self.cellContainerView.layer.cornerRadius = 8
         self.cellContainerView.layer.cornerRadius = 8
         self.cellContainerView.applyShadow()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        mainImageView.isUserInteractionEnabled = true
+        mainImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     /** Update the cell content with real data. */
@@ -46,6 +53,15 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
         switchHeartButtonStatus()
     }
 
+    /** Image was touched */
+    @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer?) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        
+        delegate?.didTouchImageView(cell: self, indexPath: indexPath)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

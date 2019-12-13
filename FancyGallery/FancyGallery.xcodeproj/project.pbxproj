@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B648995423A05BE00012EC7A /* UIView+ApplyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648995323A05BE00012EC7A /* UIView+ApplyShadow.swift */; };
 		B648995723A086250012EC7A /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648995623A086250012EC7A /* PhotoModel.swift */; };
+		B648996023A2D7770012EC7A /* PhotoDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648995E23A2D7770012EC7A /* PhotoDialogViewController.swift */; };
+		B648996123A2D7770012EC7A /* PhotoDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B648995F23A2D7770012EC7A /* PhotoDialogViewController.xib */; };
 		B658BECA239EE8FB004AB608 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658BEC9239EE8FB004AB608 /* AppDelegate.swift */; };
 		B658BECC239EE8FB004AB608 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658BECB239EE8FB004AB608 /* ViewController.swift */; };
 		B658BECF239EE8FB004AB608 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B658BECD239EE8FB004AB608 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		B648995323A05BE00012EC7A /* UIView+ApplyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ApplyShadow.swift"; sourceTree = "<group>"; };
 		B648995623A086250012EC7A /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		B648995E23A2D7770012EC7A /* PhotoDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDialogViewController.swift; sourceTree = "<group>"; };
+		B648995F23A2D7770012EC7A /* PhotoDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDialogViewController.xib; sourceTree = "<group>"; };
 		B658BEC6239EE8FB004AB608 /* FancyGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B658BEC9239EE8FB004AB608 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B658BECB239EE8FB004AB608 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +67,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B648995D23A2D7470012EC7A /* Photo Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				B648995E23A2D7770012EC7A /* PhotoDialogViewController.swift */,
+				B648995F23A2D7770012EC7A /* PhotoDialogViewController.xib */,
+			);
+			path = "Photo Dialog";
+			sourceTree = "<group>";
+		};
 		B658BEBD239EE8FB004AB608 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +95,7 @@
 		B658BEC8239EE8FB004AB608 /* FancyGallery */ = {
 			isa = PBXGroup;
 			children = (
+				B648995D23A2D7470012EC7A /* Photo Dialog */,
 				B648995523A0860F0012EC7A /* Model */,
 				B648995223A05BC60012EC7A /* Extensions */,
 				B658BEDC239EE9A7004AB608 /* Gallery */,
@@ -173,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B658BED4239EE8FE004AB608 /* LaunchScreen.storyboard in Resources */,
+				B648996123A2D7770012EC7A /* PhotoDialogViewController.xib in Resources */,
 				B658BED1239EE8FE004AB608 /* Assets.xcassets in Resources */,
 				B658BEE5239F12FD004AB608 /* DefaultGalleryMainImageTableViewCell.xib in Resources */,
 				B658BEE0239EE9F4004AB608 /* DefaultGalleryViewController.xib in Resources */,
@@ -192,6 +207,7 @@
 				B648995423A05BE00012EC7A /* UIView+ApplyShadow.swift in Sources */,
 				B658BEE4239F12FD004AB608 /* DefaultGalleryMainImageTableViewCell.swift in Sources */,
 				B658BECC239EE8FB004AB608 /* ViewController.swift in Sources */,
+				B648996023A2D7770012EC7A /* PhotoDialogViewController.swift in Sources */,
 				B658BECA239EE8FB004AB608 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +354,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L88649U8C7;
 				INFOPLIST_FILE = FancyGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -346,6 +364,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FancyGallery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,7 +374,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L88649U8C7;
 				INFOPLIST_FILE = FancyGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -363,6 +384,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.FancyGallery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
