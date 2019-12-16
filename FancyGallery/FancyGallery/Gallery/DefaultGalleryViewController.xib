@@ -25,7 +25,8 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bLz-jk-CzY">
                     <rect key="frame" x="0.0" y="114" width="414" height="698"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="separatorColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="sectionIndexBackgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="35a-9v-7vS"/>
@@ -33,10 +34,10 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHp-JD-jiv">
-                    <rect key="frame" x="0.0" y="44" width="414" height="70"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gallery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euk-ZJ-bgI">
-                            <rect key="frame" x="20" y="26" width="80" height="29"/>
+                            <rect key="frame" x="20" y="70" width="80" height="29"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -45,7 +46,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="euk-ZJ-bgI" firstAttribute="leading" secondItem="fHp-JD-jiv" secondAttribute="leading" constant="20" id="Ye2-Er-6PS"/>
-                        <constraint firstAttribute="height" constant="70" id="ZVI-Ub-F8H"/>
+                        <constraint firstAttribute="height" constant="114" id="ZVI-Ub-F8H"/>
                         <constraint firstAttribute="bottom" secondItem="euk-ZJ-bgI" secondAttribute="bottom" constant="15" id="tvY-ZJ-fnA"/>
                     </constraints>
                 </view>
@@ -56,8 +57,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <items>
-                                <tabBarItem title="" systemItem="mostViewed" id="jdD-MW-y1O"/>
-                                <tabBarItem tag="1" title="" systemItem="favorites" id="YE9-OK-RdJ"/>
+                                <tabBarItem title="" image=" Offer" selectedImage=" Offer Active" id="jdD-MW-y1O"/>
+                                <tabBarItem tag="1" title="" image="heart" selectedImage="heartActive" id="YE9-OK-RdJ"/>
                             </items>
                         </tabBar>
                     </subviews>
@@ -71,7 +72,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="bLz-jk-CzY" firstAttribute="top" secondItem="fHp-JD-jiv" secondAttribute="bottom" id="0mO-AE-DBF"/>
                 <constraint firstItem="fHp-JD-jiv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="8oE-X2-YCJ"/>
@@ -81,11 +82,17 @@
                 <constraint firstItem="bLz-jk-CzY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Z2F-y3-NB2"/>
                 <constraint firstItem="bLz-jk-CzY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="dRI-15-HJ8"/>
                 <constraint firstItem="VHZ-XU-9l7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eHh-mB-uuf"/>
-                <constraint firstItem="fHp-JD-jiv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="liL-rQ-IlG"/>
+                <constraint firstItem="fHp-JD-jiv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-44" id="liL-rQ-IlG"/>
                 <constraint firstItem="VHZ-XU-9l7" firstAttribute="top" secondItem="bLz-jk-CzY" secondAttribute="bottom" id="rXG-EN-VYA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
         </view>
     </objects>
+    <resources>
+        <image name=" Offer" width="24" height="24"/>
+        <image name=" Offer Active" width="24" height="24"/>
+        <image name="heart" width="24" height="24"/>
+        <image name="heartActive" width="24" height="24"/>
+    </resources>
 </document>

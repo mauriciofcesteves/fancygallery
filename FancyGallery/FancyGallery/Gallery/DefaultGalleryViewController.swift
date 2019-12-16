@@ -43,6 +43,7 @@ class DefaultGalleryViewController: UIViewController {
     private var favouritePhotos: [Int] = []
     private var data: [PhotoModel]?
     private var dataToBePresented: [PhotoModel]?
+    private var totalOfNewFavouritePhotos = 0
     
     /** The empty state label. */
     public lazy var emptyStateLabel: UILabel = {
@@ -51,7 +52,7 @@ class DefaultGalleryViewController: UIViewController {
         label.font                                      = UIFont(name: "HelveticaNeue", size: 16)
         label.textColor = UIColor(red: 155 / 255, green: 155 / 255, blue: 155 / 255, alpha: 1)
         label.numberOfLines = 0
-        label.text = "There is no photos marked as favourite."
+        label.text = "There are no photos marked as favourite."
         label.textAlignment = .center
         
         return label
@@ -79,6 +80,7 @@ class DefaultGalleryViewController: UIViewController {
         view.addSubview(emptyStateLabel)
         self.navigationController?.navigationBar.isHidden = true
         self.tabControlContainerView.applyBottomShadow()
+        self.galleryTabBar?.selectedItem = self.galleryTabBar?.items?.first
     }
     
     /** UITabBar UI setup */
@@ -119,6 +121,7 @@ class DefaultGalleryViewController: UIViewController {
         data?.append(PhotoModel(id: 0, name: "Pet1"))
         data?.append(PhotoModel(id: 1, name: "Pet2"))
         data?.append(PhotoModel(id: 2, name: "Pet3"))
+        data?.append(PhotoModel(id: 3, name: "Pet4"))
         
         dataToBePresented?.append(contentsOf: data ?? [])
     }
@@ -217,13 +220,28 @@ extension DefaultGalleryViewController: DefaultGalleryMainImageTableViewCellDele
         if isFavourite {
             //if it's marked as favourite, saves to the list
             favouritePhotos.append(id)
+            totalOfNewFavouritePhotos += 1
         } else {
             //remove from the list of favourites
             let model = dataToBePresented?[indexPath.section]
             for (index, photoId) in favouritePhotos.enumerated() {
                 if photoId == model?.id {
                     favouritePhotos.remove(at: index)
+                    totalOfNewFavouritePhotos -= 1
                     break
+                }
+            }
+        }
+        
+        //update the UIBarItem badge value
+        for item in galleryTabBar.items ?? [] {
+            if item.tag == TabControlIndex.favouritesOnly.rawValue {
+                if totalOfNewFavouritePhotos == 0 {
+                    item.badgeValue = nil
+                } else if totalOfNewFavouritePhotos > 0 {
+                    item.badgeValue = String(totalOfNewFavouritePhotos)
+                } else if totalOfNewFavouritePhotos < 0 {
+                    totalOfNewFavouritePhotos = 0
                 }
             }
         }
@@ -238,6 +256,14 @@ extension DefaultGalleryViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         if item.tag == TabControlIndex.favouritesOnly.rawValue {
+            //clean the UITabBar badge value
+            totalOfNewFavouritePhotos = 0
+            for item in galleryTabBar.items ?? [] {
+                if item.tag == TabControlIndex.favouritesOnly.rawValue {
+                    item.badgeValue = nil
+                }
+            }
+            
             dataToBePresented = []
             
             //iterate over the list to fetch the photos marked as favourite
