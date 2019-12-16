@@ -61,13 +61,7 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
         
         delegate?.didTouchImageView(cell: self, indexPath: indexPath)
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-    }
-    
     /** Favourite button was touched. */
     @IBAction func heartButtonTouched(_ sender: Any) {
         guard let indexPath = indexPath else {

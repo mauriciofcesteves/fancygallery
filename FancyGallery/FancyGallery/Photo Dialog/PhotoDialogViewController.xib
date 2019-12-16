@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoDialogViewController" customModule="FancyGallery" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="eJB-V5-AWG" id="HO3-RV-V7j"/>
+                <outlet property="imageContainerView" destination="mBV-v8-lCV" id="e2y-VE-oI6"/>
                 <outlet property="photoImageView" destination="pJO-sj-i4Q" id="rI5-9e-57R"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,16 +23,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-sj-i4Q">
-                    <rect key="frame" x="15" y="273" width="384" height="350"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="350" id="lZh-sc-ohJ"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Dialog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hG-bw-76a">
-                    <rect key="frame" x="15" y="59" width="87" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pinch the image to zoom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hG-bw-76a">
+                    <rect key="frame" x="15" y="59" width="166" height="17"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.039215686274509803" green="0.28627450980392155" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJB-V5-AWG">
@@ -45,15 +40,32 @@
                         <action selector="closeButtonWasTouched:" destination="-1" eventType="touchUpInside" id="ge5-oY-i9a"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBV-v8-lCV">
+                    <rect key="frame" x="5" y="122" width="404" height="700"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pJO-sj-i4Q">
+                            <rect key="frame" x="10" y="175" width="384" height="350"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="350" id="lZh-sc-ohJ"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pJO-sj-i4Q" firstAttribute="leading" secondItem="mBV-v8-lCV" secondAttribute="leading" constant="10" id="EJ5-23-0bX"/>
+                        <constraint firstItem="pJO-sj-i4Q" firstAttribute="centerY" secondItem="mBV-v8-lCV" secondAttribute="centerY" id="RpM-Xb-syW"/>
+                        <constraint firstAttribute="trailing" secondItem="pJO-sj-i4Q" secondAttribute="trailing" constant="10" id="rc8-yW-GFf"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="mBV-v8-lCV" firstAttribute="top" secondItem="eJB-V5-AWG" secondAttribute="bottom" constant="40" id="2Yd-J8-qDK"/>
                 <constraint firstItem="eJB-V5-AWG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="3tV-Et-meF"/>
-                <constraint firstItem="pJO-sj-i4Q" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="AEd-5X-6qa"/>
-                <constraint firstItem="pJO-sj-i4Q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Zzv-hQ-FxB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mBV-v8-lCV" secondAttribute="trailing" constant="5" id="7Ns-Ww-6K1"/>
+                <constraint firstItem="mBV-v8-lCV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="5" id="Qm5-Ig-87G"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="mBV-v8-lCV" secondAttribute="bottom" constant="40" id="YWA-dz-3ng"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eJB-V5-AWG" secondAttribute="trailing" constant="15" id="aLs-W0-dxt"/>
-                <constraint firstItem="pJO-sj-i4Q" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eQc-Py-NVP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pJO-sj-i4Q" secondAttribute="trailing" constant="15" id="glM-nM-Dvq"/>
                 <constraint firstItem="7hG-bw-76a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="rtx-aX-byL"/>
                 <constraint firstItem="7hG-bw-76a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ts0-A9-UjC"/>
             </constraints>
