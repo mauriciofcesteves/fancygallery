@@ -12,16 +12,36 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var rootViewController = DefaultGalleryViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        sleep(1)
+        //Request all employees when the app is launching
+        NetworkManager.shared.requestPhotoData(completion: { [weak self] (success, data) -> Void in
+            if success {
+                //refresh the UI in the main queue
+                DispatchQueue.main.async {
+                    if let data = data, !data.isEmpty {
+                        self?.rootViewController.data = data
+                        self?.rootViewController.dataToBePresented = data
+                        self?.rootViewController.tableView.reloadData()
+                    }
+                }
+            } else {
+                //error in the request
+                self?.rootViewController.setupErrorState()
+            }
+            
+            //Hide activity indicator
+            DispatchQueue.main.async {
+                self?.rootViewController.displayActivityIndicator(false)
+            }
+        })
         
         //Window
         window                     = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: DefaultGalleryViewController())
+        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
         
         return true

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DefaultGalleryViewController: UIViewController {
+class DefaultGalleryViewController: BaseViewController {
 
     // MARK: - Enums
     enum GalleryType: Int {
@@ -40,10 +40,10 @@ class DefaultGalleryViewController: UIViewController {
     
     // MARK: - General Variables
     private var currentTabIndex: TabControlIndex = .tableViewMode
-    private var favouritePhotos: [Int] = []
-    private var data: [PhotoModel]?
-    private var dataToBePresented: [PhotoModel]?
+    private var favouritePhotos: [String] = []
     private var totalOfNewFavouritePhotos = 0
+    public var data: [PhotoModel]?
+    public var dataToBePresented: [PhotoModel]?
     
     /** The empty state label. */
     public lazy var emptyStateLabel: UILabel = {
@@ -60,7 +60,8 @@ class DefaultGalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        displayActivityIndicator(true)
+        
         // Do any additional setup after loading the view.
         setupUI()
         
@@ -68,9 +69,8 @@ class DefaultGalleryViewController: UIViewController {
         tableViewSetup()
         tabBarSetup()
         
-        //fetch data (from backend and userdefaults)
+        //load favourite photos from userdefaults
         loadFavouritePhotos()
-        loadData()
     }
     
     /** General setup UI */
@@ -111,19 +111,7 @@ class DefaultGalleryViewController: UIViewController {
     /** Load saved photos from UserDefaults */
     func loadFavouritePhotos() {
         favouritePhotos = []
-        favouritePhotos = UserDefaults.standard.value(forKey: "favouritePhotos") as? [Int] ?? []
-    }
-    
-    /** TODO: Fetch data from a back end */
-    func loadData() {
-        data = []
-        dataToBePresented = []
-        data?.append(PhotoModel(id: 0, name: "Pet1"))
-        data?.append(PhotoModel(id: 1, name: "Pet2"))
-        data?.append(PhotoModel(id: 2, name: "Pet3"))
-        data?.append(PhotoModel(id: 3, name: "Pet4"))
-        
-        dataToBePresented?.append(contentsOf: data ?? [])
+        favouritePhotos = UserDefaults.standard.value(forKey: "favouritePhotos") as? [String] ?? []
     }
     
     /** Empty state for favourite screen. */
@@ -138,7 +126,7 @@ class DefaultGalleryViewController: UIViewController {
     }
     
     /** Return true if the photo is marked as favourite. */
-    func isMarkedAsFavourite(photoId: Int) -> Bool {
+    func isMarkedAsFavourite(photoId: String) -> Bool {
         for id in favouritePhotos {
             if photoId == id {
                 return true
@@ -146,6 +134,16 @@ class DefaultGalleryViewController: UIViewController {
         }
         
         return false
+    }
+    
+    /* Setup an error state if there is any connection problem. */
+    func setupErrorState() {
+        let alertController = UIAlertController(title: "Error", message: "Oops! Something went wrong. Please check your internet and try again later.", preferredStyle: .alert)
+        let mainAction = UIAlertAction(title: "Ok", style: .default, handler: { (alert) in
+            
+        })
+        alertController.addAction(mainAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -167,12 +165,23 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultGalleryMainImageTableViewCell", for: indexPath) as? DefaultGalleryMainImageTableViewCell {
 
-            guard let model = dataToBePresented?[indexPath.section], let image = UIImage(named: model.name) else {
+            guard let model = dataToBePresented?[indexPath.section] else {
                 return UITableViewCell()
             }
             
             cell.delegate = self
-            cell.update(image, isFavourite: isMarkedAsFavourite(photoId: model.id), indexPath)
+            cell.update(imageTitle: model.name, imageDescription: model.photoDescription, isFavourite: isMarkedAsFavourite(photoId: model.id), indexPath)
+            
+            if let smallPhoto = model.photoURL {
+                cell.mainImageView?.sd_setImage(with: URL(string: smallPhoto), completed: { (image, error, cache, urls) in
+                    if (error != nil) {
+                        cell.mainImageView.image = UIImage(named: "Placeholder")
+                    } else {
+                        cell.mainImageView?.image = image
+                    }
+                })
+            }
+            
             return cell
         }
         return UITableViewCell()
@@ -188,26 +197,32 @@ extension DefaultGalleryViewController: UITableViewDataSource, UITableViewDelega
 extension DefaultGalleryViewController: DefaultGalleryMainImageTableViewCellDelegate {
     
     func didTouchImageView(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
-        guard let model = dataToBePresented?[indexPath.section], let image = UIImage(named: model.name) else {
+        guard let model = dataToBePresented?[indexPath.section], let photoUrl = model.photoURL else {
             return
         }
         
-        let controller = PhotoDialogViewController()
-        self.navigationController?.present(controller, animated: true)
-        controller.photoImageView.image = image
+        let url = URL(string: photoUrl)
+        if let data = try? Data(contentsOf: url!), let image = UIImage(data: data) {
+            let controller = PhotoDialogViewController()
+            self.navigationController?.present(controller, animated: true)
+            controller.photoImageView.image = image
+        }
     }
     
     func didTouchShareButton(cell: DefaultGalleryMainImageTableViewCell, indexPath: IndexPath) {
-        guard let model = dataToBePresented?[indexPath.section], let image = UIImage(named: model.name) else {
+        guard let model = dataToBePresented?[indexPath.section], let photoUrl = model.photoURL else {
             return
         }
         
-        let message = ""
-        let objectsToShare = [message, image] as [Any]
-        
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-        self.present(activityVC, animated: true, completion: nil)
+        let url = URL(string: photoUrl)
+        if let data = try? Data(contentsOf: url!), let image = UIImage(data: data) {
+            let message = ""
+            let objectsToShare = [message, image] as [Any]
+            
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
     
     func didTouchHeartButton(cell: DefaultGalleryMainImageTableViewCell, isFavourite: Bool, indexPath: IndexPath) {
@@ -282,7 +297,8 @@ extension DefaultGalleryViewController: UITabBarDelegate {
             
             tableView.reloadData()
         } else if item.tag == TabControlIndex.tableViewMode.rawValue {
-            loadData()
+            data = NetworkManager.shared.pets
+            dataToBePresented = NetworkManager.shared.pets
             tableView.isHidden = false
             emptyStateLabel.isHidden = true
             tableView.reloadData()

@@ -105,8 +105,10 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellContainerView" destination="cyJ-UN-1fc" id="pqk-bq-Sii"/>
+                <outlet property="descriptionLabel" destination="uLi-NE-wKG" id="wnu-C1-IZS"/>
                 <outlet property="heartButton" destination="HaP-55-9GF" id="m0f-MG-1gd"/>
                 <outlet property="mainImageView" destination="QEh-h8-9JP" id="14L-Jz-iWZ"/>
+                <outlet property="titleLabel" destination="FQW-6b-Egf" id="B6h-7B-CTi"/>
             </connections>
             <point key="canvasLocation" x="195.6521739130435" y="288.28125"/>
         </tableViewCell>

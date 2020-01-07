@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol DefaultGalleryMainImageTableViewCellDelegate: class {
     
@@ -26,6 +27,8 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var cellContainerView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     // MARK: - General Variables
     weak var delegate: DefaultGalleryMainImageTableViewCellDelegate?
@@ -36,6 +39,7 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // Initialization code
+        
         self.cellContainerView.layer.cornerRadius = 8
         self.cellContainerView.layer.cornerRadius = 8
         self.cellContainerView.applyShadow()
@@ -46,10 +50,11 @@ class DefaultGalleryMainImageTableViewCell: UITableViewCell {
     }
     
     /** Update the cell content with real data. */
-    func update(_ image: UIImage, isFavourite: Bool = false, _ indexPath: IndexPath) {
+    func update(imageTitle: String?, imageDescription: String?, isFavourite: Bool = false, _ indexPath: IndexPath) {
         self.indexPath = indexPath
-        mainImageView.image = image
         self.isFavourite = isFavourite
+        self.titleLabel.text = imageTitle
+        self.descriptionLabel.text = imageDescription
         switchHeartButtonStatus()
     }
 

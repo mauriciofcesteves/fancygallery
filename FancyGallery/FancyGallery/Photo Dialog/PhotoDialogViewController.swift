@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoDialogViewController: UIViewController, UIGestureRecognizerDelegate {
+class PhotoDialogViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
